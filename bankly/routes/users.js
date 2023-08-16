@@ -18,7 +18,7 @@ const { authUser, requireLogin, requireAdmin, ensureCorrectUserOrAdmin } = requi
 router.get('/', authUser, requireLogin, async function(req, res, next) {
   try {
     let users = await User.getAll();
-    return res.json({ users });
+    return res.json({users});
   } catch (err) {
     return next(err);
   }
@@ -97,7 +97,7 @@ router.delete('/:username', authUser, requireAdmin, async function(
   next
 ) {
   try {
-    User.delete(req.params.username);
+    await User.delete(req.params.username);
     return res.json({ message: 'deleted' });
   } catch (err) {
     return next(err);
